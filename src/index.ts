@@ -20,9 +20,10 @@ const app = express();
 const PORT = Number(process.env.PORT ?? 3000);
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
+const allowedOrigin = process.env.FRONTEND_URL ?? '*';
 app.use(cors({
-  origin: process.env.FRONTEND_URL ?? '*',
-  credentials: true,
+  origin: allowedOrigin,
+  credentials: allowedOrigin !== '*',
 }));
 app.use(express.json({ limit: '20mb' }));
 
